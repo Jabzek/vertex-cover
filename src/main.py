@@ -1,5 +1,7 @@
 import argparse
+from pathlib import Path
 from graph_generation import data_generator
+from bruteforce import brute_force_manage
 
 
 def main():
@@ -9,7 +11,9 @@ def main():
                        help="Generate graphs and save them to a file. " \
                        "Requires the file name without the file type. " \
                        "If the file already exists its contents will be overwritten.")
-    group.add_argument("--run", action="store_true", help="Run algorithms on the generated graphs")
+    group.add_argument("--run", nargs=2, metavar=("Algorithm_type", "File_name"), 
+                       help="Run specific algorithm on the generated data from file. " \
+                       "Possible algorithms: bruteforce, ")
     
     args = parser.parse_args()
 
@@ -19,10 +23,24 @@ def main():
         data_generator(file_json)
         print(f"Data has been generated and saved to the {file_name}.json.")
     elif args.run:
-        print("Run algorithms")
+        algorithm, file = args.run
+        folder = Path(__file__).resolve().parent.parent
+        data_folder = folder / "data"
+        file = file + ".json"
 
-    
+        if not data_folder.exists():
+            raise FileNotFoundError("File with data doesn't exist.")
+        
+        data_file = data_folder / file
 
+        if not data_file.exists():
+            raise FileExistsError("File with data doesn't exist.")
+
+        match (algorithm):
+            case "bruteforce":
+                brute_force_manage(data_file)
+            case _:
+                raise ValueError("Algorithm doesn't exists")
 
 
 

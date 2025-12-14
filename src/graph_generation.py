@@ -8,7 +8,7 @@ class Graph:
     nodes: int
     size: str
     nodes_weight: list[int] = field(default_factory=list)
-    edges: list[tuple[int, int]] = field(default_factory=list)
+    edges: list[list[int, int]] = field(default_factory=list)
 
     def add_edge(self, tuple_):
         self.edges.append(tuple_)
@@ -18,6 +18,11 @@ class Graph:
 
     def data_to_dict(self):
         return asdict(self)
+    
+    @classmethod
+    def from_dict(cls, dict_):
+        pass
+
 
 
 def draw_edges(graph, number_of_edges):
@@ -33,8 +38,8 @@ def draw_edges(graph, number_of_edges):
         elif a > b:
             a, b = b, a
 
-        if (a, b) not in graph.edges:
-            graph.add_edge((a, b))
+        if [a, b] not in graph.edges:
+            graph.add_edge([a, b])
             i += 1
 
 
