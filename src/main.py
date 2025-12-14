@@ -1,4 +1,5 @@
 import argparse
+import json
 from pathlib import Path
 from graph_generation import data_generator
 from bruteforce import brute_force_manage
@@ -35,10 +36,13 @@ def main():
 
         if not data_file.exists():
             raise FileExistsError("File with data doesn't exist.")
-
+        
+        with open(data_file, "r") as f:
+            data = json.load(f)
+                
         match (algorithm):
             case "bruteforce":
-                brute_force_manage(data_file)
+                brute_force_manage(data)
             case _:
                 raise ValueError("Algorithm doesn't exists")
 

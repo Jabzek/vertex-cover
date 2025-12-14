@@ -10,8 +10,8 @@ class Graph:
     nodes_weight: list[int] = field(default_factory=list)
     edges: list[list[int, int]] = field(default_factory=list)
 
-    def add_edge(self, tuple_):
-        self.edges.append(tuple_)
+    def add_edge(self, edge):
+        self.edges.append(edge)
 
     def add_weight(self, weight):
         self.nodes_weight.append(weight)
@@ -21,7 +21,7 @@ class Graph:
     
     @classmethod
     def from_dict(cls, dict_):
-        pass
+        return cls(dict_["nodes"], dict_["size"], dict_["nodes_weight"], dict_["edges"])
 
 
 
@@ -66,7 +66,7 @@ def save_to_json(new_data, data_file, size):
 
 
 def data_generator(file_name):
-    graphs = {"small":((18, 60), (19, 50), (20, 20), (21, 70), (22, 40)),
+    graphs = {"small":((19, 60), (20, 50), (21, 20), (22, 70), (23, 40)),
               "medium": ((40, 70), (60, 50), (80, 20), (90, 60), (100, 30)),
                "big": ((150, 50), (200, 30), (250, 20), (300, 15), (350, 10))}
 
