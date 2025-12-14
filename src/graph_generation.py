@@ -8,20 +8,26 @@ class Graph:
     nodes: int
     size: str
     nodes_weight: list[int] = field(default_factory=list)
-    edges: list[list[int, int]] = field(default_factory=list)
+    edges: list[list[int]] = field(default_factory=list)
+    n_list: list[list[int]] = field(default_factory=list)
 
+    def list_init(self, nodes):
+        self.n_list = [[] for n in range(nodes)]
+    
     def add_edge(self, edge):
         self.edges.append(edge)
+        self.n_list[edge[0]].append(edge[1])
+        self.n_list[edge[1]].append(edge[0])
 
     def add_weight(self, weight):
         self.nodes_weight.append(weight)
-
+    
     def data_to_dict(self):
         return asdict(self)
     
     @classmethod
     def from_dict(cls, dict_):
-        return cls(dict_["nodes"], dict_["size"], dict_["nodes_weight"], dict_["edges"])
+        return cls(dict_["nodes"], dict_["size"], dict_["nodes_weight"], dict_["edges"], dict_["n_list"])
 
 
 
@@ -87,6 +93,7 @@ def data_generator(file_name):
             number_of_edges = saturation * all_edges // 100 
             graph = Graph(nodes, size)
             
+            graph.list_init(graph.nodes)
             draw_edges(graph, number_of_edges)
             draw_weight(graph)
             new_data = graph.data_to_dict()

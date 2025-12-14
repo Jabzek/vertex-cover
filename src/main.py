@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 from graph_generation import data_generator
 from bruteforce import brute_force_manage
+from greedy import greedy_manage
 
 
 def main():
@@ -43,6 +44,8 @@ def main():
         match (algorithm):
             case "bruteforce":
                 brute_force_manage(data)
+            case "greedy":
+                greedy_manage(data)
             case _:
                 raise ValueError("Algorithm doesn't exists")
 
