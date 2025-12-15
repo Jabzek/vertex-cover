@@ -11,8 +11,8 @@ class Graph:
     edges: list[list[int]] = field(default_factory=list)
     n_list: list[list[int]] = field(default_factory=list)
 
-    def list_init(self, nodes):
-        self.n_list = [[] for n in range(nodes)]
+    def list_init(self):
+        self.n_list = [[] for _ in range(self.nodes)]
     
     def add_edge(self, edge):
         self.edges.append(edge)
@@ -28,7 +28,6 @@ class Graph:
     @classmethod
     def from_dict(cls, dict_):
         return cls(dict_["nodes"], dict_["size"], dict_["nodes_weight"], dict_["edges"], dict_["n_list"])
-
 
 
 def draw_edges(graph, number_of_edges):
@@ -93,7 +92,7 @@ def data_generator(file_name):
             number_of_edges = saturation * all_edges // 100 
             graph = Graph(nodes, size)
             
-            graph.list_init(graph.nodes)
+            graph.list_init()
             draw_edges(graph, number_of_edges)
             draw_weight(graph)
             new_data = graph.data_to_dict()

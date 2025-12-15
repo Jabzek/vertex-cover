@@ -15,7 +15,7 @@ def main():
                        "If the file already exists its contents will be overwritten.")
     group.add_argument("--run", nargs=2, metavar=("Algorithm_type", "File_name"), 
                        help="Run specific algorithm on the generated data from file. " \
-                       "Possible algorithms: bruteforce, ")
+                       "Possible algorithms: bruteforce, greedy")
     
     args = parser.parse_args()
 
