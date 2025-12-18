@@ -4,7 +4,7 @@ from pathlib import Path
 from graph_generation import data_generator
 from bruteforce import brute_force_manage
 from greedy import greedy_manage
-
+from lp_algorithm import ilp_algorithm
 
 def main():
     parser = argparse.ArgumentParser()
@@ -15,7 +15,7 @@ def main():
                        "If the file already exists its contents will be overwritten.")
     group.add_argument("--run", nargs=2, metavar=("Algorithm_type", "File_name"), 
                        help="Run specific algorithm on the generated data from file. " \
-                       "Possible algorithms: bruteforce, greedy")
+                       "Possible algorithms: bruteforce, greedy, ilp, lp")
     
     args = parser.parse_args()
 
@@ -46,6 +46,8 @@ def main():
                 brute_force_manage(data)
             case "greedy":
                 greedy_manage(data)
+            case "ilp":
+                ilp_algorithm(data)
             case _:
                 raise ValueError("Algorithm doesn't exists")
 
