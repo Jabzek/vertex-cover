@@ -4,7 +4,7 @@ from pathlib import Path
 from graph_generation import data_generator
 from bruteforce import brute_force_manage
 from greedy import greedy_manage
-from lp_algorithm import ilp_algorithm
+from lp_algorithm import lp_algorithms_manage
 
 def main():
     parser = argparse.ArgumentParser()
@@ -47,7 +47,9 @@ def main():
             case "greedy":
                 greedy_manage(data)
             case "ilp":
-                ilp_algorithm(data)
+                lp_algorithms_manage(data, lp=False)
+            case "lp":
+                lp_algorithms_manage(data, lp=True)
             case _:
                 raise ValueError("Algorithm doesn't exists")
 
