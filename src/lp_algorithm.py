@@ -47,11 +47,11 @@ def lp_algorithm(graph):
 
 def lp_algorithms_manage(data, lp):
     if lp: 
-        graphes = ["small", "medium", "big"]
+        graphs = ["small", "medium", "big"]
     else:
-        graphes = ["small", "medium"]
+        graphs = ["small", "medium"]
 
-    for size in graphes:
+    for size in graphs:
         for graph_dict in data[size]:
             graph = Graph.from_dict(graph_dict)
             
